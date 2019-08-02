@@ -1,5 +1,7 @@
 # Changelog
 
+## 🏄‍♀️ 1.1.1
+
 ## 🔑 1.1.0
 
 Wrangler 1.1.0 includes a number of improvements to documentation and project stability, including:
