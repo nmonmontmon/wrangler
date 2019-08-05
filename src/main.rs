@@ -58,6 +58,9 @@ fn run() -> Result<(), failure::Error> {
                             Arg::with_name("title")
                         )
                 )
+                .subcommand(
+                    SubCommand::with_name("list")
+                )
         )
         .subcommand(
             SubCommand::with_name("generate")
@@ -252,6 +255,9 @@ fn run() -> Result<(), failure::Error> {
             ("create", Some(create_matches)) => {
                 let title = create_matches.value_of("title").unwrap();
                 commands::kv::create_namespace(title)?;
+            }
+            ("list", Some(_create_matches)) => {
+                commands::kv::list_namespaces()?;
             }
             ("", None) => message::warn("kv expects a subcommand"),
             _ => unreachable!(),
