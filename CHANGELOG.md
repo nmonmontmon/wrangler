@@ -2,6 +2,54 @@
 
 ## 🏄‍♀️ 1.1.1
 
+- ### Features
+
+  - **Improve JSON errors debuggability - [xtuc], [pull/394]**
+
+    **TODO: would like examples for all of these**
+
+    This PR improves JSON error output in `wrangler`. Specifically:
+
+    - If a `package.json` file fails to decode, `wrangler` now emits a clearer error.
+    - If the `wranglerjs` backend returns invalid JSON, it now preserves the output file for further investigation. Note that the console doesn't print the output file location by default, and you will need to pass `RUST_LOG=info` while running `wrangler build`, and search for the `--output-file=FILE` argument passed to `wranglerjs`.
+    - If the preview service returns invalid JSON, it now emits a clearer error, and the full output can be seen by using `RUST_LOG=info`.
+
+    [xtuc]: https://github.com/xtuc
+    [pull/394]: https://github.com/cloudflare/wrangler/pull/394
+
+- ### Fixes
+
+  - **Fix `wrangler config` for systems with non-unix EOL - [xortive], [issue/389][pull/399]**
+
+    `wrangler config` was not properly truncating whitespace from the end of user input, resulting in a panic when trying to use `wrangler publish`, because `wrangler` would try to create an HTTP header with invalid characters. Now, `wrangler` will properly truncate extra whitespace (including `\r`) from the end of the input into `wrangler config`
+
+    [xortive]: https://github.com/xortive
+    [issue/389]: https://github.com/cloudflare/wrangler/issues/389
+    [pull/399]: https://github.com/cloudflare/wrangler/pull/399
+
+- ### Maintenance
+
+  - **Migrate straggler emojis to terminal::emoji - [EverlastingBugstopper], [pull/382]**
+
+    This PR updates the last remaining instances where `wrangler` was using hard-coded emojis for messages, rather than using `terminal::emoji`. In addition, there are two instances where this PR changes the usage of the ⛔ emoji to ⚠️.
+
+    [EverlastingBugstopper]: https://github.com/EverlastingBugstopper
+    [pull/382]: https://github.com/cloudflare/wrangler/pull/382
+
+  - **Update issue templates to fit Github's data model - [EverlastingBugstopper], [pull/387]**
+
+    Our previous issue templates were not picked up by Github's user interface. This PR updates the templates to fit the accepted data model, and adds some style tweaks to make the templates easier to use.
+
+    [EverlastingBugstopper]: https://github.com/EverlastingBugstopper
+    [pull/387]: https://github.com/cloudflare/wrangler/pull/387
+
+  - **Move Emoji formatting/messaging into new functions - [ashleymichal], [pull/391]**
+
+    This PR makes improvements to the internal messaging logic of Wrangler, allowing us to be more flexible in how we display information to users.
+
+    [ashleymichal]: https://github.com/ashleymichal
+    [pull/391]: https://github.com/cloudflare/wrangler/pull/391
+
 ## 🔑 1.1.0
 
 Wrangler 1.1.0 includes a number of improvements to documentation and project stability, including:
